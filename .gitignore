@@ -4,6 +4,7 @@ Cargo.lock
 bin/
 pkg/
 wasm-pack.log
+dist/
 
 # Created by https://www.gitignore.io/api/rust
 # Edit at https://www.gitignore.io/?templates=rust
@@ -136,7 +137,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
