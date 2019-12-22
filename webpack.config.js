@@ -1,3 +1,4 @@
+/* eslint-env node*/
 const path = require("path");
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "bootstrap.js",
 		chunkFilename: "[name].bundle.js",
-		publicPath: "/wasm/"
+		publicPath: process.env.ASSETS_PATH || "/wasm/"
 	},
 	mode: "production"
 };

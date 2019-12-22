@@ -3,5 +3,9 @@
 	"parserOptions": {
         "ecmaVersion": 11,
         "sourceType": "module"
+    },
+    "env": {
+    	"es2020": true,
+    	"browser": true
     }
 }

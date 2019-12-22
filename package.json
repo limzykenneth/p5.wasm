@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cd rust && cargo test",
     "preinstall": "cd rust && wasm-pack build",
-    "prebuild": "cd rust && wasm-pack build",
+    "prebuild": "rm dist/* && cd rust && wasm-pack build",
     "build": "webpack --config webpack.config.js"
   },
   "author": "",
