@@ -1,4 +1,4 @@
-/target
+rust/target
 **/*.rs.bk
 Cargo.lock
 bin/
