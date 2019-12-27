@@ -1,8 +1,10 @@
 [package]
 name = "p5-wasm"
 version = "0.1.0"
-authors = ["pi"]
+authors = ["Kenneth Lim <limzy.kenneth@gmail.com> (https://designerken.be/)"]
 edition = "2018"
+description = "Addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js."
+license = "BSD-2-Clause"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -30,5 +32,4 @@ wee_alloc = { version = "0.4.2", optional = true }
 wasm-bindgen-test = "0.2"
 
 [profile.release]
-# Tell `rustc` to optimize for small code size.
-opt-level = "s"
+opt-level = 3

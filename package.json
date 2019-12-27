@@ -1,15 +1,15 @@
 {
   "name": "p5.wasm",
   "version": "0.0.1",
-  "description": "",
+  "description": "Addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.",
   "main": "index.js",
   "scripts": {
     "test": "cd rust && cargo test",
     "preinstall": "cd rust && wasm-pack build",
-    "prebuild": "rm dist/* && cd rust && wasm-pack build",
+    "prebuild": "rm -f dist/* && cd rust && wasm-pack build",
     "build": "webpack --config webpack.config.js"
   },
-  "author": "",
+  "author": "Kenneth Lim <limzy.kenneth@gmail.com> (https://designerken.be/)",
   "license": "BSD-2-Clause",
   "dependencies": {
     "p5-wasm": "file:./rust/pkg"
