@@ -1,6 +1,6 @@
 # p5.wasm
 
-An experimental Addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.
+An experimental addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.
 
 ## Usage
 Unlike most other addon libraries, you will need three files in order to use this addon library. This is due to how WebAssembly is designed but we won't go into details here. To note is that the release zip file will contain three files:
