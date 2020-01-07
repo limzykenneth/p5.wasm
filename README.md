@@ -3,13 +3,20 @@
 An experimental addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.
 
 ## Usage
+The easiest way to use p5.wasm is to use the CDN link.
+```html
+<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.1.0/dist/p5.wasm.js"></script>
+```
+
+However if for any reason you cannot use the CDN link, you can continue reading, otherwise skip to the next two paragraphs.
+
 Unlike most other addon libraries, you will need three files in order to use this addon library. This is due to how WebAssembly is designed but we won't go into details here. To note is that the release zip file will contain three files:
 
 1. p5.wasm.js
 2. index.bundle.js
 3. p5.wasm
 
-To use the files, you must put them in a folder called `wasm` in your web server's root, then in your HTML file after including `p5.js`, you can then include `p5.wasm.js` with a `<script>` tag. You should not include the other two files within the HTML file, they will be loaded by `p5.wasm.js`. If you cannot put the files in a folder called `wasm` at root, then you will need to follow the build steps outlined below to build a copy yourself with the right path. (If I can get a CDN link of sorts up you can skip this step and just include the CDN link, will update)
+To use the files, you must put them in a folder called `wasm` in your web server's root, then in your HTML file after including `p5.js`, you can then include `p5.wasm.js` with a `<script>` tag. You should not include the other two files within the HTML file, they will be loaded by `p5.wasm.js`. If you cannot put the files in a folder called `wasm` at root, then you will need to follow the build steps outlined below to build a copy yourself with the right path.
 
 It is not enough however to just include the files. To be able to start using p5.wasm you will need to wait for `index.bundle.js` and `p5.wasm` to finish loading asynchronously by `p5.wasm.js`, otherwise your p5 sketch may be initialized before p5.wasm's functions are attached to the p5 prototype object.
 
