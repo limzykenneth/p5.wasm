@@ -66,20 +66,31 @@ It may be possible to skip waiting for the promise in global mode but support fo
 ## API
 Currently the following functions are implemented:
 
-* `wasm.abs(n)` &rarr; `abs(n)`
-* `wasm.ceil(n)` &rarr; `ceil(n)`
-* `wasm.constrain(n, low, high)` &rarr; `constrain(n, low, high)`
-* `wasm.dist(x1, y1, x2, y2)` &rarr; `dist(x1, y1, x2, y2)`
-* `wasm.exp(n)` &rarr; `exp(n)`
-* `wasm.floor(n)` &rarr; `floor(n)`
-* `wasm.lerp(start, stop, amt)` &rarr; `lerp(start, stop, amt)`
-* `wasm.log(n)` &rarr; `log(n)`
-* `wasm.mag(x, y)` &rarr; `mag(x, y)`
-* `wasm.map(n, start1, stop1, start2, stop2, [withinBounds])` &rarr; `map(n, start1, stop1, start2, stop2, [withinBounds])`
-* `wasm.norm(n, start, stop)` &rarr; `norm(n, start, stop)`
-* `wasm.pow(x, y)` &rarr; `pow(x, y)`
-* `wasm.sq(n)` &rarr; `sq(n)`
-* `wasm.sqrt(n)` &rarr; `sqrt(n)`
+| p5.wasm                        | p5                        |
+| ------------------------------ |---------------------------|
+| `wasm.abs(n)`                  | `abs(n)`                  |
+| `wasm.ceil(n)`                 | `ceil(n)`                 |
+| `wasm.constrain(n, low, high)` | `constrain(n, low, high)` |
+| `wasm.dist(x1, y1, x2, y2)`    | `dist(x1, y1, x2, y2)`    |
+| `wasm.exp(n)`                  | `exp(n)`                  |
+| `wasm.floor(n)`                | `floor(n)`                |
+| `wasm.lerp(start, stop, amt)`  | `lerp(start, stop, amt)`  |
+| `wasm.log(n)`                  | `log(n)`                  |
+| `wasm.mag(x, y)`               | `mag(x, y)`               |
+| `wasm.map(n, start1, stop1, start2, stop2, [withinBounds])` | `map(n, start1, stop1, start2, stop2, [withinBounds])` |
+| `wasm.norm(n, start, stop)`    | `norm(n, start, stop)`    |
+| `wasm.sq(n)`                   | `sq(n)`                   |
+| `wasm.sqrt(n)`                 | `sqrt(n)`                 |
+
+Upcoming release:
+
+| p5.wasm                        | p5                        |
+| ------------------------------ |---------------------------|
+| `wasm.fract(n)`                | `fract(n)`                |
+| `wasm.noise(x)`                | `noise(x)`                |
+| `wasm.noise2d(x, y)`           | `noise(x, y)`             |
+| `wasm.noise3d(x, y, z)`        | `noise(x, y, z)`          |
+
 
 ## Development
 To build p5.wasm, you will need Rust setup on your system, follow the steps outlined [here](https://rustwasm.github.io/docs/book/game-of-life/setup.html) to install `rustup`, `rustc`, `cargo` and `wasm-pack`, `cargo-generate` is not necessary unless you want to follow the tutorial in the Rust book (do try it, it's rather interesting). Also assuming you have node.js and npm already setup but if not, [download and install node.js](https://nodejs.org/).
