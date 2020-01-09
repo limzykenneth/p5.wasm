@@ -93,6 +93,14 @@ impl P5Wasm {
 			self.perlin_amp_falloff = falloff;
 		}
 	}
+
+	pub fn noise_seed(&mut self, seed: f64){
+		self.perlin_lcg.set_seed(seed);
+		self.perlin = Vec::<f64>::new();
+		for _ in 0..PERLIN_SIZE {
+			self.perlin.push(self.perlin_lcg.rand());
+		}
+	}
 }
 
 fn scaled_cosine(i:f64) -> f64 {
