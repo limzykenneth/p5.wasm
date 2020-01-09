@@ -1,5 +1,3 @@
-// use rand::rngs::OsRng;
-// use rand::Rng;
 use wasm_bindgen::prelude::*;
 use super::p5_wasm::P5Wasm;
 
@@ -85,6 +83,15 @@ impl P5Wasm {
 		}
 
 		r
+	}
+
+	pub fn noise_detail(&mut self, lod: usize, falloff: f64){
+		if lod > 0 {
+			self.perlin_octaves = lod;
+		}
+		if falloff > 0.0 {
+			self.perlin_amp_falloff = falloff;
+		}
 	}
 }
 

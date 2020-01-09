@@ -12,7 +12,7 @@ extern "C" {
 #[wasm_bindgen]
 pub struct P5Wasm {
 	pub(crate) perlin: Vec<f64>,
-	pub(crate) perlin_octaves: i32,
+	pub(crate) perlin_octaves: usize,
 	pub(crate) perlin_amp_falloff: f64,
 }
 
