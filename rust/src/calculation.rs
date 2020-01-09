@@ -18,7 +18,11 @@ impl P5Wasm {
 	}
 
 	pub fn dist(&self, x1: f64, y1: f64, x2: f64, y2: f64) -> f64 {
-		self.mag(x2 - x1, y2 - y1)
+		((x1 - x2).powi(2) + (y1 - y2).powi(2)).sqrt()
+	}
+
+	pub fn dist3d(&self, x1: f64, y1: f64, z1: f64, x2: f64, y2: f64, z2: f64) -> f64 {
+		((x1 - x2).powi(2) + (y1 - y2).powi(2) + (z1 - z2).powi(2)).sqrt()
 	}
 
 	pub fn exp(&self, n: f64) -> f64 {
@@ -38,7 +42,7 @@ impl P5Wasm {
 	}
 
 	pub fn mag(&self, x: f64, y: f64) -> f64 {
-		x.hypot(y)
+		(x.powi(2) + y.powi(2)).sqrt()
 	}
 
 	pub fn map(&self, n: f64, start1: f64, stop1: f64, start2: f64, stop2: f64, within_bounds: JsValue) -> f64 {

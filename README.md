@@ -84,12 +84,13 @@ Currently the following functions are implemented:
 
 Upcoming release:
 
-| p5.wasm                        | p5                        |
-| ------------------------------ |---------------------------|
-| `wasm.fract(n)`                | `fract(n)`                |
-| `wasm.noise(x)`                | `noise(x)`                |
-| `wasm.noise2d(x, y)`           | `noise(x, y)`             |
-| `wasm.noise3d(x, y, z)`        | `noise(x, y, z)`          |
+| p5.wasm                               | p5                             |
+| ------------------------------------- |--------------------------------|
+| `wasm.fract(n)`                       | `fract(n)`                     |
+| `wasm.noise(x)`                       | `noise(x)`                     |
+| `wasm.noise2d(x, y)`                  | `noise(x, y)`                  |
+| `wasm.noise3d(x, y, z)`               | `noise(x, y, z)`               |
+| `wasm.dist3d(x1, y1, z1, x2, y2, z2)` | `dist(x1, y1, z1, x2, y2, z2)` |
 
 
 ## Development
