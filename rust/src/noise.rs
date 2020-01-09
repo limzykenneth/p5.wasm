@@ -16,6 +16,14 @@ impl P5Wasm {
 		self.perlin_noise(x, 0.0, 0.0)
 	}
 
+	pub fn noise2d(&self, x:f64, y:f64) -> f64 {
+		self.perlin_noise(x, y, 0.0)
+	}
+
+	pub fn noise3d(&self, x:f64, y:f64, z:f64) -> f64 {
+		self.perlin_noise(x, y, z)
+	}
+
 	fn perlin_noise(&self, x:f64, y:f64, z:f64) -> f64 {
 		let x = x.abs();
 		let y = y.abs();
