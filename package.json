@@ -10,7 +10,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "cd rust && cargo test",
+    "test": "cd rust && wasm-pack test --firefox --headless",
     "preinstall": "cd rust && wasm-pack build",
     "prebuild": "rm -f dist/* && cd rust && wasm-pack build",
     "build": "webpack --config webpack.config.js",

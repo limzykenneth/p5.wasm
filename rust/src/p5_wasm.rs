@@ -43,21 +43,18 @@ mod lcg {
 	const c:f64 = 1013904223.0;
 
 	pub struct LCG {
-		seed: f64,
 		z: f64,
 	}
 
 	impl LCG {
 		pub(super) fn new() -> LCG {
 			LCG {
-				seed: super::random(),
 				z: super::random(),
 			}
 		}
 
 		pub(crate) fn set_seed(&mut self, val: f64){
-			self.seed = (val as u32) as f64;
-			self.z = self.seed;
+			self.z = (val as i32 as u32 >> 0) as f64;
 		}
 
 		pub(crate) fn rand(&mut self) -> f64{
@@ -65,17 +62,5 @@ mod lcg {
 
 			self.z / m
 		}
-	}
-}
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-
-	#[test]
-	fn test_noise(){
-		let p5 = P5Wasm::new();
-		assert!(p5.noise(1.2) > 0.0);
-		assert!(p5.noise(1.2) < 1.0);
 	}
 }

@@ -1,5 +1,5 @@
 mod utils;
-mod p5_wasm;
+pub mod p5_wasm;
 mod calculation;
 mod noise;
 
