@@ -1,6 +1,7 @@
 mod utils;
 mod p5_wasm;
 mod calculation;
+mod noise;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
