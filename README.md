@@ -91,6 +91,8 @@ Upcoming release:
 | `wasm.noise2d(x, y)`                  | `noise(x, y)`                  |
 | `wasm.noise3d(x, y, z)`               | `noise(x, y, z)`               |
 | `wasm.dist3d(x1, y1, z1, x2, y2, z2)` | `dist(x1, y1, z1, x2, y2, z2)` |
+| `wasm.round(n)`                       | `round(n)`                     |
+| `wasm.round_decimal(n, decimal)`      | `round(n, decimal)`            |
 
 
 ## Development
