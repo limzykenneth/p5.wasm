@@ -14,7 +14,7 @@ impl P5Wasm {
 	}
 
 	pub fn constrain(&self, n: f64, low: f64, high: f64) -> f64 {
-		n.min(low).max(high)
+		n.min(high).max(low)
 	}
 
 	pub fn dist(&self, x1: f64, y1: f64, x2: f64, y2: f64) -> f64 {
