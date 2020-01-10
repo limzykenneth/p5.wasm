@@ -1,6 +1,6 @@
 {
   "name": "p5.wasm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.",
   "keywords": [
     "p5.js",
