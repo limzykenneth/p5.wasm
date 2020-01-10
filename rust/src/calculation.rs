@@ -66,6 +66,14 @@ impl P5Wasm {
 		x.powf(y)
 	}
 
+	pub fn round(&self, n: f64) -> f64 {
+		n.round()
+	}
+
+	pub fn round_decimal(&self, n: f64, decimal: i32) -> f64 {
+		(n * (10.0_f64).powi(decimal)).round() / (10.0_f64).powi(decimal)
+	}
+
 	pub fn sq(&self, n: f64) -> f64 {
 		n * n
 	}
