@@ -5,7 +5,7 @@ An experimental addon library for p5.js written in Rust and compiled to WebAssem
 ## Usage
 The easiest way to use p5.wasm is to use the CDN link.
 ```html
-<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.1.0/dist/p5.wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.1.1/dist/p5.wasm.js"></script>
 ```
 
 However if for any reason you cannot use the CDN link, you can continue reading, otherwise skip to the next two paragraphs.
@@ -66,34 +66,34 @@ It may be possible to skip waiting for the promise in global mode but support fo
 ## API
 Currently the following functions are implemented:
 
-| p5.wasm                        | p5                        |
-| ------------------------------ |---------------------------|
-| `wasm.abs(n)`                  | `abs(n)`                  |
-| `wasm.ceil(n)`                 | `ceil(n)`                 |
-| `wasm.constrain(n, low, high)` | `constrain(n, low, high)` |
-| `wasm.dist(x1, y1, x2, y2)`    | `dist(x1, y1, x2, y2)`    |
-| `wasm.exp(n)`                  | `exp(n)`                  |
-| `wasm.floor(n)`                | `floor(n)`                |
-| `wasm.lerp(start, stop, amt)`  | `lerp(start, stop, amt)`  |
-| `wasm.log(n)`                  | `log(n)`                  |
-| `wasm.mag(x, y)`               | `mag(x, y)`               |
+| p5.wasm                               | p5                             |
+| ------------------------------------- |--------------------------------|
+| `wasm.abs(n)`                         | `abs(n)`                       |
+| `wasm.ceil(n)`                        | `ceil(n)`                      |
+| `wasm.constrain(n, low, high)`        | `constrain(n, low, high)`      |
+| `wasm.dist(x1, y1, x2, y2)`           | `dist(x1, y1, x2, y2)`         |
+| `wasm.dist3d(x1, y1, z1, x2, y2, z2)` | `dist(x1, y1, z1, x2, y2, z2)` |
+| `wasm.exp(n)`                         | `exp(n)`                       |
+| `wasm.floor(n)`                       | `floor(n)`                     |
+| `wasm.lerp(start, stop, amt)`         | `lerp(start, stop, amt)`       |
+| `wasm.log(n)`                         | `log(n)`                       |
+| `wasm.mag(x, y)`                      | `mag(x, y)`                    |
 | `wasm.map(n, start1, stop1, start2, stop2, [withinBounds])` | `map(n, start1, stop1, start2, stop2, [withinBounds])` |
-| `wasm.norm(n, start, stop)`    | `norm(n, start, stop)`    |
-| `wasm.sq(n)`                   | `sq(n)`                   |
-| `wasm.sqrt(n)`                 | `sqrt(n)`                 |
+| `wasm.norm(n, start, stop)`           | `norm(n, start, stop)`         |
+| `wasm.round(n)`                       | `round(n)`                     |
+| `wasm.round_decimal(n, decimal)`      | `round(n, decimal)`            |
+| `wasm.sq(n)`                          | `sq(n)`                        |
+| `wasm.sqrt(n)`                        | `sqrt(n)`                      |
+|                                       |                                |
+| `wasm.noise(x)`                       | `noise(x)`                     |
+| `wasm.noise2d(x, y)`                  | `noise(x, y)`                  |
+| `wasm.noise3d(x, y, z)`               | `noise(x, y, z)`               |
 
 Upcoming release:
 
 | p5.wasm                               | p5                             |
 | ------------------------------------- |--------------------------------|
 | `wasm.fract(n)`                       | `fract(n)`                     |
-| `wasm.noise(x)`                       | `noise(x)`                     |
-| `wasm.noise2d(x, y)`                  | `noise(x, y)`                  |
-| `wasm.noise3d(x, y, z)`               | `noise(x, y, z)`               |
-| `wasm.dist3d(x1, y1, z1, x2, y2, z2)` | `dist(x1, y1, z1, x2, y2, z2)` |
-| `wasm.round(n)`                       | `round(n)`                     |
-| `wasm.round_decimal(n, decimal)`      | `round(n, decimal)`            |
-
 
 ## Development
 To build p5.wasm, you will need Rust setup on your system, follow the steps outlined [here](https://rustwasm.github.io/docs/book/game-of-life/setup.html) to install `rustup`, `rustc`, `cargo` and `wasm-pack`, `cargo-generate` is not necessary unless you want to follow the tutorial in the Rust book (do try it, it's rather interesting). Also assuming you have node.js and npm already setup but if not, [download and install node.js](https://nodejs.org/).
