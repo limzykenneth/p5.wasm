@@ -163,6 +163,95 @@ impl Vector {
 			z: z,
 		}
 	}
+
+	pub fn dist(&self, v: Vector) -> f64{
+		let mut r = v.copy();
+		r.sub_vector(self.copy());
+		r.mag()
+	}
+
+	pub fn normalize(&mut self){
+		let len = self.mag();
+		if len != 0.0 {
+			self.mult(1.0/len);
+		}
+	}
+
+	pub fn limit(&mut self, max: f64){
+		let msq = self.mag_sq();
+		if msq > max * max {
+			self.div(msq.sqrt());
+			self.mult(max);
+		}
+	}
+
+	pub fn set_mag(&mut self, n: f64){
+		self.normalize();
+		self.mult(n);
+	}
+
+	pub fn heading(&self) -> f64{
+		self.y.atan2(self.x)
+	}
+
+	pub fn rotate(&mut self, a: f64){
+		let new_heading = self.heading() + a;
+		let mag = self.mag();
+		self.x = new_heading.cos() * mag;
+		self.y = new_heading.sin() * mag;
+	}
+
+	pub fn angle_between(&self, v: Vector) -> f64{
+		let dotmagmag = self.dot_vector(v.copy()) / (self.mag() * v.mag());
+		let angle = dotmagmag.max(-1.0).min(1.0).acos();
+
+		let mut z =  self.cross(v).z;
+		if z == 0.0 {
+			z = 0.0;
+		}
+
+		angle * z.signum()
+	}
+
+	pub fn lerp_vector(&mut self, v: Vector, amt: f64){
+		self.lerp_3d(v.x, v.y, v.z, amt);
+	}
+
+	pub fn lerp_1d(&mut self, x: f64, amt: f64){
+		self.x += (x - self.x) * amt;
+	}
+
+	pub fn lerp_2d(&mut self, x: f64, y: f64, amt: f64){
+		self.x += (x - self.x) * amt;
+		self.y += (y - self.y) * amt;
+	}
+
+	pub fn lerp_3d(&mut self, x: f64, y: f64, z: f64, amt: f64){
+		self.x += (x - self.x) * amt;
+		self.y += (y - self.y) * amt;
+		self.z += (z - self.z) * amt;
+	}
+
+	// Not sure how well this translate to JS
+	pub fn array(&self) -> Vec<f64>{
+		vec![self.x, self.y, self.z]
+	}
+
+	pub fn equals_vector(&self, v: Vector) -> bool{
+		self.x == v.x && self.y == v.y && self.z == v.z
+	}
+
+	pub fn equals_1d(&self, x: f64) -> bool{
+		self.x == x
+	}
+
+	pub fn equals_2d(&self, x: f64, y: f64) -> bool{
+		self.x == x && self.y == y
+	}
+
+	pub fn equals_3d(&self, x: f64, y: f64, z: f64) -> bool{
+		self.x == x && self.y == y && self.z == z
+	}
 }
 
 #[wasm_bindgen]
