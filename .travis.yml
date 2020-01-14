@@ -6,5 +6,7 @@ rust:
 dist: xenial
 services:
   - xvfb
-before_install: npm run preinstall
+before_install:
+  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+  - npm run preinstall
 script: npm test
