@@ -7,9 +7,8 @@ dist: xenial
 services:
   - xvfb
 before_install:
-  - (test -x $HOME/.cargo/bin/cargo-install-update || cargo install cargo-update)
-  - (test -x $HOME/.cargo/bin/cargo-generate || cargo install --vers "^0.2" cargo-generate)
-  - cargo install-update -a
-  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh -s -- -f
+  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh | sh
+  - nvm install 12
   - npm run preinstall
+install: npm ci
 script: npm test
