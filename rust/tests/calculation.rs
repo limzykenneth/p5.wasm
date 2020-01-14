@@ -9,7 +9,7 @@ use p5_wasm::p5_wasm::P5Wasm;
 wasm_bindgen_test_configure!(run_in_browser);
 
 #[wasm_bindgen_test]
-fn test_abs(){
+fn abs(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.abs(1.2), 1.2);
@@ -17,7 +17,7 @@ fn test_abs(){
 }
 
 #[wasm_bindgen_test]
-fn test_ceil(){
+fn ceil(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.ceil(1.2), 2.0);
@@ -25,7 +25,7 @@ fn test_ceil(){
 }
 
 #[wasm_bindgen_test]
-fn test_constrain(){
+fn constrain(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.constrain(1.2, 0.0, 1.0), 1.0);
@@ -33,28 +33,28 @@ fn test_constrain(){
 }
 
 #[wasm_bindgen_test]
-fn test_dist(){
+fn dist(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.dist(2.0, 4.0, 6.0, 8.0), 5.656854249492381);
 }
 
 #[wasm_bindgen_test]
-fn test_dist3d(){
+fn dist3d(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.dist3d(2.0, 4.0, 6.0, 8.0, 10.0, 12.0), 10.392304845413264);
 }
 
 #[wasm_bindgen_test]
-fn test_exp(){
+fn exp(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.exp(1.2), 3.3201169227365472);
 }
 
 #[wasm_bindgen_test]
-fn test_floor(){
+fn floor(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.floor(1.2), 1.0);
@@ -62,35 +62,35 @@ fn test_floor(){
 }
 
 #[wasm_bindgen_test]
-fn test_lerp(){
+fn lerp(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.lerp(0.5, 0.0, 100.0), -49.5);
 }
 
 #[wasm_bindgen_test]
-fn test_log(){
+fn log(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.log(1.2), 0.1823215567939546);
 }
 
 #[wasm_bindgen_test]
-fn test_mag(){
+fn mag(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.mag(3.0, 4.0), 5.0);
 }
 
 #[wasm_bindgen_test]
-fn test_map(){
+fn map(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.map(0.2, 0.0, 1.0, 0.0, 100.0, JsValue::FALSE), 20.0);
 }
 
 #[wasm_bindgen_test]
-fn test_map_constrain(){
+fn map_constrain(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.map(1.2, 0.0, 1.0, 0.0, 100.0, JsValue::FALSE), 120.0);
@@ -98,21 +98,21 @@ fn test_map_constrain(){
 }
 
 #[wasm_bindgen_test]
-fn test_norm(){
+fn norm(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.norm(50.0, 0.0, 100.0), 0.5);
 }
 
 #[wasm_bindgen_test]
-fn test_pow(){
+fn pow(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.pow(2.0, 3.0), 8.0);
 }
 
 #[wasm_bindgen_test]
-fn test_round(){
+fn round(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.round(1.2), 1.0);
@@ -120,7 +120,7 @@ fn test_round(){
 }
 
 #[wasm_bindgen_test]
-fn test_round_decimal(){
+fn round_decimal(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.round_decimal(1.23456789, 2), 1.23);
@@ -128,21 +128,21 @@ fn test_round_decimal(){
 }
 
 #[wasm_bindgen_test]
-fn test_sq(){
+fn sq(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.sq(1.2), 1.44);
 }
 
 #[wasm_bindgen_test]
-fn test_sqrt(){
+fn sqrt(){
 	let p5 = P5Wasm::new();
 
 	assert_eq!(p5.sqrt(1.2), 1.0954451150103321);
 }
 
 // #[wasm_bindgen_test]
-// fn test_fract(){
+// fn fract(){
 // 	let p5 = P5Wasm::new();
 
 // 	assert_eq!(p5.fract(1.2), 0.2);

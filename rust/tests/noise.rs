@@ -8,7 +8,7 @@ use p5_wasm::p5_wasm::P5Wasm;
 wasm_bindgen_test_configure!(run_in_browser);
 
 #[wasm_bindgen_test]
-fn test_noise(){
+fn noise(){
 	let mut p5 = P5Wasm::new();
 
 	p5.noise_seed(2.22);
@@ -19,7 +19,7 @@ fn test_noise(){
 }
 
 #[wasm_bindgen_test]
-fn test_noise_detail(){
+fn noise_detail(){
 	let mut p5 = P5Wasm::new();
 
 	p5.noise_seed(2.22);

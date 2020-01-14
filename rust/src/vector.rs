@@ -14,9 +14,9 @@ macro_rules! console_warn {
 
 #[wasm_bindgen]
 pub struct Vector {
-	x: f64,
-	y: f64,
-	z: f64,
+	pub x: f64,
+	pub y: f64,
+	pub z: f64,
 }
 
 // Unlike JS counterparts, these never return the vector instance
@@ -258,5 +258,17 @@ impl Vector {
 impl P5Wasm {
 	pub fn create_vector(&self) -> Vector{
 		Vector::new(0.0, 0.0, 0.0)
+	}
+
+	pub fn create_vector_1d(&self, x: f64) -> Vector{
+		Vector::new(x, 0.0, 0.0)
+	}
+
+	pub fn create_vector_2d(&self, x: f64, y: f64) -> Vector{
+		Vector::new(x, y, 0.0)
+	}
+
+	pub fn create_vector_3d(&self, x: f64, y: f64, z: f64) -> Vector{
+		Vector::new(x, y, z)
 	}
 }
