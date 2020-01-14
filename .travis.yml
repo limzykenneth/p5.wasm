@@ -1,4 +1,4 @@
-language: node_js
+language: rust
 node_js:
   - "12"
 rust:
