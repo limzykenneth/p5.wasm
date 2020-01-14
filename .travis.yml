@@ -6,4 +6,5 @@ rust:
 dist: xenial
 services:
   - xvfb
+before_install: npm run preinstall
 script: npm test
