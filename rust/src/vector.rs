@@ -4,8 +4,8 @@ use std::f64::INFINITY;
 
 #[wasm_bindgen]
 extern "C" {
-    #[wasm_bindgen(js_namespace = console)]
-    fn warn(s: &str);
+	#[wasm_bindgen(js_namespace = console)]
+	fn warn(s: &str);
 }
 
 macro_rules! console_warn {
@@ -107,7 +107,7 @@ impl Vector {
 
 	pub fn mult(&mut self, n: f64){
 		if n == INFINITY {
-			console_warn!("p5.wasm.Vector.prototype.mult: n is not a finite number");
+			console_warn!("p5.prototype.wasm.Vector.mult: n is not a finite number");
 		} else {
 			self.x *= n;
 			self.y *= n;
@@ -117,9 +117,9 @@ impl Vector {
 
 	pub fn div(&mut self, n: f64){
 		if n == INFINITY {
-			console_warn!("p5.wasm.Vector.prototype.mult: n is not a finite number");
+			console_warn!("p5.prototype.wasm.Vector.mult: n is not a finite number");
 		} else if n == 0.0 {
-			console_warn!("p5.wasm.Vector.prototype.mult: divide by 0");
+			console_warn!("p5.prototype.wasm.Vector.mult: divide by 0");
 		} else {
 			self.x /= n;
 			self.y /= n;
