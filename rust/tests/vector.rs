@@ -21,7 +21,7 @@ fn set_vector(){
 	let mut v = p5.create_vector();
 	let v2 = p5.create_vector_3d(1.2, 2.2, 3.2);
 
-	v.set_vector(v2);
+	v.set_vector(&v2);
 
 	assert_eq!(v.x, 1.2);
 	assert_eq!(v.y, 2.2);
@@ -81,7 +81,7 @@ fn add_vector(){
 	let mut v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	v.add_vector(v2);
+	v.add_vector(&v2);
 
 	assert_eq!(v.x, 5.4);
 	assert_eq!(v.y, 7.4);
@@ -130,7 +130,7 @@ fn sub_vector(){
 	let mut v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	v.sub_vector(v2);
+	v.sub_vector(&v2);
 
 	assert_eq!(v.x, -3.0);
 	assert_eq!(v.y, -3.0);
@@ -219,7 +219,7 @@ fn dot_vector(){
 	let v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	assert_eq!(v.dot_vector(v2), 36.32000000000001);
+	assert_eq!(v.dot_vector(&v2), 36.32000000000001);
 }
 
 #[wasm_bindgen_test]
@@ -252,7 +252,7 @@ fn cross(){
 	let v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	let r = v.cross(v2);
+	let r = v.cross(&v2);
 
 	assert_eq!(r.x, -2.9999999999999982);
 	assert_eq!(r.y, 6.000000000000002);
@@ -265,7 +265,10 @@ fn dist(){
 	let v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	assert_eq!(v.dist(v2), 5.196152422706632);
+	assert_eq!(v.dist(&v2), 5.196152422706632);
+	assert_eq!(v2.x, 4.2);
+	assert_eq!(v2.y, 5.2);
+	assert_eq!(v2.z, 6.2);
 }
 
 #[wasm_bindgen_test]
@@ -330,7 +333,7 @@ fn angle_between(){
 	let v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	assert_eq!(v.angle_between(v2), -0.19963080123649965);
+	assert_eq!(v.angle_between(&v2), -0.19963080123649965);
 }
 
 #[wasm_bindgen_test]
@@ -339,7 +342,7 @@ fn lerp_vector(){
 	let mut v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	v.lerp_vector(v2, 0.5);
+	v.lerp_vector(&v2, 0.5);
 
 	assert_eq!(v.x, 2.7);
 	assert_eq!(v.y, 3.7);
@@ -396,8 +399,8 @@ fn equals_vector(){
 	let v = p5.create_vector_3d(1.2, 2.2, 3.2);
 	let v2 = p5.create_vector_3d(4.2, 5.2, 6.2);
 
-	assert_eq!(v.equals_vector(v2), false);
-	assert_eq!(v.equals_vector(p5.create_vector_3d(1.2, 2.2, 3.2)), true);
+	assert_eq!(v.equals_vector(&v2), false);
+	assert_eq!(v.equals_vector(&p5.create_vector_3d(1.2, 2.2, 3.2)), true);
 }
 
 #[wasm_bindgen_test]

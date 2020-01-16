@@ -13,6 +13,7 @@ macro_rules! console_warn {
 }
 
 #[wasm_bindgen]
+#[derive(Copy, Clone)]
 pub struct Vector {
 	pub x: f64,
 	pub y: f64,
@@ -34,7 +35,7 @@ impl Vector {
 		format!("p5.wasm.Vector Object : [{}, {}, {}]", self.x, self.y, self.z).to_string()
 	}
 
-	pub fn set_vector(&mut self, vector: Vector){
+	pub fn set_vector(&mut self, vector: &Vector){
 		self.x = vector.x;
 		self.y = vector.y;
 		self.z = vector.z;
@@ -63,7 +64,7 @@ impl Vector {
 		}
 	}
 
-	pub fn add_vector(&mut self, vector: Vector){
+	pub fn add_vector(&mut self, vector: &Vector){
 		self.x += vector.x;
 		self.y += vector.y;
 		self.z += vector.z;
@@ -84,7 +85,7 @@ impl Vector {
 		self.z += z;
 	}
 
-	pub fn sub_vector(&mut self, vector: Vector){
+	pub fn sub_vector(&mut self, vector: &Vector){
 		self.x -= vector.x;
 		self.y -= vector.y;
 		self.z -= vector.z;
@@ -135,7 +136,7 @@ impl Vector {
 		self.x * self.x + self.y * self.y + self.z * self.z
 	}
 
-	pub fn dot_vector(&self, vector: Vector) -> f64{
+	pub fn dot_vector(&self, vector: &Vector) -> f64{
 		self.dot_3d(vector.x, vector.y, vector.z)
 	}
 
@@ -152,7 +153,7 @@ impl Vector {
 	}
 
 	// Non-static version only
-	pub fn cross(&self, v: Vector) -> Vector{
+	pub fn cross(&self, v: &Vector) -> Vector{
 		let x = self.y * v.z - self.z * v.y;
 		let y = self.z * v.x - self.x * v.z;
 		let z = self.x * v.y - self.y * v.x;
@@ -164,9 +165,9 @@ impl Vector {
 		}
 	}
 
-	pub fn dist(&self, v: Vector) -> f64{
+	pub fn dist(&self, v: &Vector) -> f64{
 		let mut r = v.copy();
-		r.sub_vector(self.copy());
+		r.sub_vector(self);
 		r.mag()
 	}
 
@@ -201,8 +202,8 @@ impl Vector {
 		self.y = new_heading.sin() * mag;
 	}
 
-	pub fn angle_between(&self, v: Vector) -> f64{
-		let dotmagmag = self.dot_vector(v.copy()) / (self.mag() * v.mag());
+	pub fn angle_between(&self, v: &Vector) -> f64{
+		let dotmagmag = self.dot_vector(v) / (self.mag() * v.mag());
 		let angle = dotmagmag.max(-1.0).min(1.0).acos();
 
 		let mut z =  self.cross(v).z;
@@ -213,7 +214,7 @@ impl Vector {
 		angle * z.signum()
 	}
 
-	pub fn lerp_vector(&mut self, v: Vector, amt: f64){
+	pub fn lerp_vector(&mut self, v: &Vector, amt: f64){
 		self.lerp_3d(v.x, v.y, v.z, amt);
 	}
 
@@ -237,7 +238,7 @@ impl Vector {
 		vec![self.x, self.y, self.z]
 	}
 
-	pub fn equals_vector(&self, v: Vector) -> bool{
+	pub fn equals_vector(&self, v: &Vector) -> bool{
 		self.x == v.x && self.y == v.y && self.z == v.z
 	}
 
