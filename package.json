@@ -14,7 +14,9 @@
     "preinstall": "cd rust && wasm-pack build",
     "prebuild": "rm -f dist/* && cd rust && wasm-pack build",
     "build": "webpack --config webpack.config.js",
-    "prepublish": "CDN_BUILD='true' npm run build"
+    "prepublish": "CDN_BUILD='true' npm run build",
+    "release": "np",
+    "postrelease": "npm run build"
   },
   "files": [
     "dist/*.{js,wasm}",
@@ -28,6 +30,7 @@
     "p5-wasm": "file:./rust/pkg"
   },
   "devDependencies": {
+    "np": "^5.2.1",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.3.10"
   }
