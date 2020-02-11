@@ -1,5 +1,7 @@
 # p5.wasm
 
+![The title p5.wasm on a dark background full of ones and zeros](banner.png?raw=true "p5.wasm")
+
 An experimental addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.
 
 ## Usage
