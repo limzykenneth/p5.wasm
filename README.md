@@ -7,7 +7,7 @@ An experimental addon library for p5.js written in Rust and compiled to WebAssem
 ## Usage
 The easiest way to use p5.wasm is to use the CDN link.
 ```html
-<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.1.1/dist/p5.wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.2.0/dist/p5.wasm.js"></script>
 ```
 
 However if for any reason you cannot use the CDN link, you can continue reading, otherwise skip to the next two paragraphs.
