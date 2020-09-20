@@ -30,7 +30,7 @@
     "p5-wasm": "file:./rust/pkg"
   },
   "devDependencies": {
-    "np": "^5.2.1",
+    "np": "^6.5.0",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.3.10"
   }
