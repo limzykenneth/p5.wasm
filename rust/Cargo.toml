@@ -6,6 +6,9 @@ edition = "2018"
 description = "Addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js."
 license = "BSD-2-Clause"
 
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-Oz", "--enable-mutable-globals"]
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -29,7 +32,7 @@ console_error_panic_hook = { version = "0.1.1", optional = true }
 wee_alloc = { version = "0.4.2", optional = true }
 
 [dev-dependencies]
-wasm-bindgen-test = "0.2"
+wasm-bindgen-test = "0.3"
 
 [profile.release]
 opt-level = 3
