@@ -4,6 +4,8 @@
 
 An experimental addon library for p5.js written in Rust and compiled to WebAssembly. Reimplements common functions found in p5.js.
 
+[![Build Status](https://travis-ci.com/limzykenneth/p5.wasm.svg?branch=master)](https://travis-ci.com/limzykenneth/p5.wasm)
+
 ## Usage
 The easiest way to use p5.wasm is to use the CDN link.
 ```html
@@ -68,7 +70,7 @@ It may be possible to skip waiting for the promise in global mode but support fo
 ## API
 For full available API, please visit [API.md](API.md).
 
-To note is that there is not function overloading in p5.wasm so make sure you are calling the right function with the right signature.
+To note is that there is no function overloading in p5.wasm so make sure you are calling the right function with the right signature.
 
 There is also no garbage collector, you will have to take care of handling memory yourself. If the function returns primitive types like string or numbers, you don't have to do anything additional, but if it returns an object (p5.wasm.Vector for example), you will have to free the memory yourself by calling `obj.free()` on the object itself when you don't need it anymore.
 
