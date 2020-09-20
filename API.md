@@ -18,6 +18,7 @@ Currently the following functions are implemented:
 | `wasm.round_decimal(n, decimal)`      | `round(n, decimal)`            |
 | `wasm.sq(n)`                          | `sq(n)`                        |
 | `wasm.sqrt(n)`                        | `sqrt(n)`                      |
+| `wasm.fract(n)`                       | `fract(n)`                     |
 |                                       |                                |
 | `wasm.noise(x)`                       | `noise(x)`                     |
 | `wasm.noise2d(x, y)`                  | `noise(x, y)`                  |
@@ -67,12 +68,6 @@ Currently the following functions are implemented:
 | `Vector.equals_1d(x)`                 | `Vector.equals(x)`             |
 | `Vector.equals_2d(x, y)`              | `Vector.equals(x, y)`          |
 | `Vector.equals_3d(x, y, z)`           | `Vector.equals(x, y, z)`       |
-
-Upcoming release:
-
-| p5.wasm                               | p5                             |
-| ------------------------------------- |--------------------------------|
-| `wasm.fract(n)`                       | `fract(n)`                     |
 
 
 ## Note

@@ -5,7 +5,7 @@ use std::f64::consts::E;
 // math/calculation.js
 #[wasm_bindgen]
 impl P5Wasm {
-	pub fn abs(&self, n: f64) -> f64{
+	pub fn abs(&self, n: f64) -> f64 {
 		n.abs()
 	}
 
