@@ -1,4 +1,6 @@
 language: rust
+rust:
+  - 1.46.0
 node_js:
   - "12"
 rust:
@@ -7,8 +9,7 @@ dist: xenial
 services:
   - xvfb
 before_install:
-  - curl https://rustwasm.github.io/wasm-pack/installer/init.sh | sh
-  - nvm install 12
+  - cargo install wasm-pack --version 0.9.1
   - npm run preinstall
 install: npm ci
 script: npm test
