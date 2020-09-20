@@ -2,6 +2,7 @@ Currently the following functions are implemented:
 
 | p5.wasm                               | p5                             |
 | ------------------------------------- |--------------------------------|
+| **Calculation**                       |                                |
 | `wasm.abs(n)`                         | `abs(n)`                       |
 | `wasm.ceil(n)`                        | `ceil(n)`                      |
 | `wasm.constrain(n, low, high)`        | `constrain(n, low, high)`      |
@@ -19,11 +20,11 @@ Currently the following functions are implemented:
 | `wasm.sq(n)`                          | `sq(n)`                        |
 | `wasm.sqrt(n)`                        | `sqrt(n)`                      |
 | `wasm.fract(n)`                       | `fract(n)`                     |
-|                                       |                                |
+| **Noise**                             |                                |
 | `wasm.noise(x)`                       | `noise(x)`                     |
 | `wasm.noise2d(x, y)`                  | `noise(x, y)`                  |
 | `wasm.noise3d(x, y, z)`               | `noise(x, y, z)`               |
-|                                       |                                |
+| **Vectors**                           |                                |
 | `wasm.create_vector()`                | `createVector()`               |
 | `wasm.create_vector_1d(x)`            | `createVector(x)`              |
 | `wasm.create_vector_2d(x, y)`         | `createVector(x, y)`           |
@@ -68,7 +69,18 @@ Currently the following functions are implemented:
 | `Vector.equals_1d(x)`                 | `Vector.equals(x)`             |
 | `Vector.equals_2d(x, y)`              | `Vector.equals(x, y)`          |
 | `Vector.equals_3d(x, y, z)`           | `Vector.equals(x, y, z)`       |
+| **Trigonometry**                                                       |
+| `wasm.acos(value)`                    | `acos(value)`                  |
+| `wasm.asin(value)`                    | `asin(value)`                  |
+| `wasm.atan(value)`                    | `atan(value)`                  |
+| `wasm.atan2(y, x)`                    | `atan2(y, x)`                  |
+| `wasm.cos(angle)`                     | `cos(angle)`                   |
+| `wasm.sin(angle)`                     | `sin(angle)`                   |
+| `wasm.tan(angle)`                     | `tan(angle)`                   |
+| `wasm.degrees(radians)`               | `degrees(radians)`             |
+| `wasm.radians(degrees)`               | `radians(degrees)`             |
 
 
 ## Note
 * If you create a vector using `wasm.create_vector[..]`, you have to use the corresponding p5.wasm functions with it and not the original p5.js ones. You should be able to pass these vectors directly to functions that accept vectors as an input, as long as they only try to access the `x`, `y`, `z` properties only.
+* All trigonometry functions use radians as units, to pass in degrees as a unit, use `wasm.radians()` to convert the angle first.
