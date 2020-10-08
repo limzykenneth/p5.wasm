@@ -1,5 +1,5 @@
 use wasm_bindgen::prelude::*;
-use super::p5_wasm::P5Wasm;
+use crate::p5_wasm::P5Wasm;
 
 const PERLIN_YWRAPB:usize = 4;
 const PERLIN_YWRAP:usize = 1 << PERLIN_YWRAPB;

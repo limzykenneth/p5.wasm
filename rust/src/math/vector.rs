@@ -1,5 +1,5 @@
 use wasm_bindgen::prelude::*;
-use super::p5_wasm::P5Wasm;
+use crate::p5_wasm::P5Wasm;
 use std::f64::INFINITY;
 
 #[wasm_bindgen]
