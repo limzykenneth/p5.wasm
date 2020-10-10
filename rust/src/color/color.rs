@@ -16,10 +16,12 @@ pub struct Color {
 impl Color {
 	pub fn new(vals: Vec<f64>) -> Color {
 		let mut maxes = HashMap::new();
-		maxes.insert("RGB".to_string(), vec!(255.0, 255.0, 255.0, 255.0));
+		maxes.insert("rgb".to_string(), vec!(255.0, 255.0, 255.0, 255.0));
+		maxes.insert("hsb".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
+		maxes.insert("hsl".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
 
 		Color {
-			array: vals,
+			array: vals.iter().map(|v| v / 255.0).collect(),
 			mode: String::from("RGB"),
 			maxes: maxes,
 			hsba: None
@@ -89,30 +91,32 @@ impl Color {
 				format!("#{}{}{}{}", r, g, b, a)
 			}
 			"rgb" => {
-				format!("rgb({}, {}, {})", arr[0], arr[1], arr[2])
+				format!("rgb({}, {}, {})", arr[0] * 255.0, arr[1] * 255.0, arr[2] * 255.0)
 			}
 			"rgb%" => {
-				let r = arr[0].to_precision(3);
-				let g = arr[1].to_precision(3);
-				let b = arr[2].to_precision(3);
+				let r = (arr[0] * 100.0).to_precision(3);
+				let g = (arr[1] * 100.0).to_precision(3);
+				let b = (arr[2] * 100.0).to_precision(3);
 
 				format!("rgb({}%, {}%, {}%)", r, g, b)
 			}
 			"rgba%" => {
-				let r = arr[0].to_precision(3);
-				let g = arr[1].to_precision(3);
-				let b = arr[2].to_precision(3);
-				let a = arr[2].to_precision(3);
+				let r = (arr[0] * 100.0).to_precision(3);
+				let g = (arr[1] * 100.0).to_precision(3);
+				let b = (arr[2] * 100.0).to_precision(3);
+				let a = (arr[2] * 100.0).to_precision(3);
 
-				format!("rgb({}%, {}%, {}%, {}%)", r, g, b, a)
+				format!("rgba({}%, {}%, {}%, {}%)", r, g, b, a)
 			}
 			"hsb" | "hsv" => {
 				if self.hsba.is_none() {
 					self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
 				}
 				let hsba = self.hsba.as_ref().unwrap();
-
-				format!("hsb({}, {}, {})", hsba[0] * self.maxes["hsb"][0], hsba[1] * self.maxes["hsb"][2], hsba[2] * self.maxes["hsb"][2])
+				// "".to_string()
+				// self.maxes["hsb"][0].to_string()
+				let maxes = self.maxes.get("hsb").unwrap();
+				format!("hsb({}, {}, {})", hsba[0] * maxes[0], hsba[1] * maxes[1], hsba[2] * maxes[2])
 			}
 			"rgba" | _ => {
 				format!("rgba({}, {}, {}, {})", arr[0] * 255.0, arr[1] * 255.0, arr[2] * 255.0, arr[3])

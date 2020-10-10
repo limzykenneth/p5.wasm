@@ -11,6 +11,7 @@ mod math {
 mod color {
 	mod color;
 	mod color_conversion;
+	mod creating_reading;
 }
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
