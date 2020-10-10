@@ -2,6 +2,7 @@ use wasm_bindgen::prelude::*;
 use crate::p5_wasm::P5Wasm;
 use std::collections::HashMap;
 use super::color_conversion;
+use wasm_bindgen::JsValue;
 
 // color/p5.Color.js
 #[wasm_bindgen]
@@ -10,6 +11,7 @@ pub struct Color {
 	mode: String,
 	maxes: HashMap< String, Vec<f64> >,
 	hsba: Option< Vec<f64> >,
+	hsla: Option< Vec<f64> >,
 }
 
 #[wasm_bindgen]
@@ -24,11 +26,23 @@ impl Color {
 			array: vals.iter().map(|v| v / 255.0).collect(),
 			mode: String::from("RGB"),
 			maxes: maxes,
-			hsba: None
+			hsba: None,
+			hsla: None,
 		}
 	}
 
-	pub fn to_string(&mut self, format: &str) -> String {
+	pub fn to_string(&mut self, f: JsValue) -> String {
+		let format;
+		let val;
+		if f.is_undefined() {
+			format = "rgba";
+		} else if f.is_string() {
+			val = f.as_string().unwrap();
+			format = &val;
+		} else {
+			panic!("Invalid value passed to to_string() function");
+		}
+
 		let arr = &self.array;
 
 		match format {
@@ -113,10 +127,87 @@ impl Color {
 					self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
 				}
 				let hsba = self.hsba.as_ref().unwrap();
-				// "".to_string()
-				// self.maxes["hsb"][0].to_string()
 				let maxes = self.maxes.get("hsb").unwrap();
+
 				format!("hsb({}, {}, {})", hsba[0] * maxes[0], hsba[1] * maxes[1], hsba[2] * maxes[2])
+			}
+			"hsb%" | "hsv%" => {
+				if self.hsba.is_none() {
+					self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
+				}
+				let hsba = self.hsba.as_ref().unwrap();
+
+				let h = (hsba[0] * 100.0).to_precision(3);
+				let s = (hsba[1] * 100.0).to_precision(3);
+				let b = (hsba[2] * 100.0).to_precision(3);
+
+				format!("hsb({}%, {}%, {}%)", h, s, b)
+			}
+			"hsba" | "hsva" => {
+				if self.hsba.is_none() {
+					self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
+				}
+				let hsba = self.hsba.as_ref().unwrap();
+				let maxes = self.maxes.get("hsb").unwrap();
+
+				format!("hsba({}, {}, {}, {})", hsba[0] * maxes[0], hsba[1] * maxes[1], hsba[2] * maxes[2], hsba[3] * maxes[3])
+			}
+			"hsba%" | "hsva%" => {
+				if self.hsba.is_none() {
+					self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
+				}
+				let hsba = self.hsba.as_ref().unwrap();
+
+				let h = (hsba[0] * 100.0).to_precision(3);
+				let s = (hsba[1] * 100.0).to_precision(3);
+				let b = (hsba[2] * 100.0).to_precision(3);
+				let a = (arr[2] * 100.0).to_precision(3);
+
+				format!("hsba({}%, {}%, {}%, {}%)", h, s, b, a)
+			}
+			"hsl" => {
+				if self.hsla.is_none() {
+					self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+				}
+
+				let hsla = self.hsla.as_ref().unwrap();
+				let maxes = self.maxes.get("hsl").unwrap();
+
+				format!("hsl({}, {}, {})", hsla[0] * maxes[0], hsla[1] * maxes[1], hsla[2] * maxes[2])
+			}
+			"hsl%" => {
+				if self.hsla.is_none() {
+					self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+				}
+				let hsla = self.hsla.as_ref().unwrap();
+
+				let h = (hsla[0] * 100.0).to_precision(3);
+				let s = (hsla[1] * 100.0).to_precision(3);
+				let l = (hsla[2] * 100.0).to_precision(3);
+
+				format!("hsl({}%, {}%, {}%)", h, s, l)
+			}
+			"hsla" => {
+				if self.hsla.is_none() {
+					self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+				}
+				let hsla = self.hsla.as_ref().unwrap();
+				let maxes = self.maxes.get("hsl").unwrap();
+
+				format!("hsla({}, {}, {}, {})", hsla[0] * maxes[0], hsla[1] * maxes[1], hsla[2] * maxes[2], hsla[3] * maxes[3])
+			}
+			"hsla%" => {
+				if self.hsla.is_none() {
+					self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+				}
+				let hsla = self.hsla.as_ref().unwrap();
+
+				let h = (hsla[0] * 100.0).to_precision(3);
+				let s = (hsla[1] * 100.0).to_precision(3);
+				let l = (hsla[2] * 100.0).to_precision(3);
+				let a = (arr[2] * 100.0).to_precision(3);
+
+				format!("hsla({}%, {}%, {}%, {}%)", h, s, l, a)
 			}
 			"rgba" | _ => {
 				format!("rgba({}, {}, {}, {})", arr[0] * 255.0, arr[1] * 255.0, arr[2] * 255.0, arr[3])
