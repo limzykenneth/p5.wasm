@@ -31,3 +31,71 @@ fn to_string(){
 	assert_eq!(c.to_string(JsValue::from_str("rgba")), "rgba(0, 255, 255, 1)");
 	assert_eq!(c.to_string(JsValue::UNDEFINED), "rgba(0, 255, 255, 1)");
 }
+
+#[wasm_bindgen_test]
+fn red(){
+	let p5 = P5Wasm::new();
+	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+
+	assert_eq!(c.red(), 0.0);
+}
+
+#[wasm_bindgen_test]
+fn green(){
+	let p5 = P5Wasm::new();
+	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+
+	assert_eq!(c.green(), 200.0);
+}
+
+#[wasm_bindgen_test]
+fn blue(){
+	let p5 = P5Wasm::new();
+	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+
+	assert_eq!(c.blue(), 255.0);
+}
+
+#[wasm_bindgen_test]
+fn alpha(){
+	let p5 = P5Wasm::new();
+	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+
+	assert_eq!(c.alpha(), 50.0);
+}
+
+#[wasm_bindgen_test]
+fn set_red(){
+	let p5 = P5Wasm::new();
+	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	c.set_red(20.0);
+
+	assert_eq!(c.red(), 20.0);
+}
+
+#[wasm_bindgen_test]
+fn set_green(){
+	let p5 = P5Wasm::new();
+	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	c.set_green(30.0);
+
+	assert_eq!(c.green(), 30.0);
+}
+
+#[wasm_bindgen_test]
+fn set_blue(){
+	let p5 = P5Wasm::new();
+	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	c.set_blue(40.0);
+
+	assert_eq!(c.blue(), 40.0);
+}
+
+#[wasm_bindgen_test]
+fn set_alpha(){
+	let p5 = P5Wasm::new();
+	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	c.set_alpha(0.0);
+
+	assert_eq!(c.alpha(), 0.0);
+}

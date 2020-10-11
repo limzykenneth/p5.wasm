@@ -15,6 +15,7 @@ pub struct P5Wasm {
 	pub(crate) perlin_octaves: usize,
 	pub(crate) perlin_amp_falloff: f64,
 	pub(crate) perlin_lcg: lcg::LCG,
+	pub(crate) color_mode: String,
 }
 
 #[wasm_bindgen]
@@ -31,7 +32,8 @@ impl P5Wasm {
 			perlin: p,
 			perlin_octaves: 4,
 			perlin_amp_falloff: 0.5,
-			perlin_lcg: lcg::LCG::new()
+			perlin_lcg: lcg::LCG::new(),
+			color_mode: String::from("rgb"),
 		}
 	}
 }

@@ -6,6 +6,6 @@ use super::color::Color;
 #[wasm_bindgen]
 impl P5Wasm {
 	pub fn color(&self, v1: f64, v2: f64, v3: f64, v4: f64) -> Color {
-		Color::new(vec!(v1, v2, v3, v4))
+		Color::new(self, vec!(v1, v2, v3, v4))
 	}
 }

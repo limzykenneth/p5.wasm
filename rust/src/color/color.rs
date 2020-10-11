@@ -1,8 +1,8 @@
 use wasm_bindgen::prelude::*;
-use crate::p5_wasm::P5Wasm;
 use std::collections::HashMap;
 use super::color_conversion;
 use wasm_bindgen::JsValue;
+use crate::p5_wasm::P5Wasm;
 
 // color/p5.Color.js
 #[wasm_bindgen]
@@ -16,7 +16,7 @@ pub struct Color {
 
 #[wasm_bindgen]
 impl Color {
-	pub fn new(vals: Vec<f64>) -> Color {
+	pub fn new(inst: &P5Wasm, vals: Vec<f64>) -> Color {
 		let mut maxes = HashMap::new();
 		maxes.insert("rgb".to_string(), vec!(255.0, 255.0, 255.0, 255.0));
 		maxes.insert("hsb".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
@@ -24,7 +24,7 @@ impl Color {
 
 		Color {
 			array: vals.iter().map(|v| v / 255.0).collect(),
-			mode: String::from("RGB"),
+			mode: inst.color_mode.clone(),
 			maxes: maxes,
 			hsba: None,
 			hsla: None,
@@ -213,6 +213,38 @@ impl Color {
 				format!("rgba({}, {}, {}, {})", arr[0] * 255.0, arr[1] * 255.0, arr[2] * 255.0, arr[3])
 			}
 		}
+	}
+
+	pub fn set_red(&mut self, new_red: f64) {
+		self.array[0] = new_red / self.maxes.get("rgb").unwrap()[0];
+	}
+
+	pub fn set_green(&mut self, new_green: f64) {
+		self.array[1] = new_green / self.maxes.get("rgb").unwrap()[1];
+	}
+
+	pub fn set_blue(&mut self, new_blue: f64) {
+		self.array[2] = new_blue / self.maxes.get("rgb").unwrap()[2];
+	}
+
+	pub fn set_alpha(&mut self, new_alpha: f64) {
+		self.array[3] = new_alpha / self.maxes.get("rgb").unwrap()[3];
+	}
+
+	pub fn red(&self) -> f64 {
+		self.array[0] * self.maxes.get("rgb").unwrap()[0]
+	}
+
+	pub fn green(&self) -> f64 {
+		self.array[1] * self.maxes.get("rgb").unwrap()[1]
+	}
+
+	pub fn blue(&self) -> f64 {
+		self.array[2] * self.maxes.get("rgb").unwrap()[2]
+	}
+
+	pub fn alpha(&self) -> f64 {
+		self.array[3] * self.maxes.get(&self.mode).unwrap()[3]
 	}
 }
 
