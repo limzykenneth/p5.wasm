@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 use crate::utils::set_panic_hook;
+use std::collections::HashMap;
 
 const PERLIN_SIZE:usize = 4095;
 
@@ -16,6 +17,7 @@ pub struct P5Wasm {
 	pub(crate) perlin_amp_falloff: f64,
 	pub(crate) perlin_lcg: lcg::LCG,
 	pub(crate) color_mode: String,
+	pub(crate) color_maxes: HashMap< String, Vec<f64> >,
 }
 
 #[wasm_bindgen]
@@ -28,12 +30,18 @@ impl P5Wasm {
 			p.push(random());
 		}
 
+		let mut maxes = HashMap::new();
+		maxes.insert("rgb".to_string(), vec!(255.0, 255.0, 255.0, 255.0));
+		maxes.insert("hsb".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
+		maxes.insert("hsl".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
+
 		P5Wasm {
 			perlin: p,
 			perlin_octaves: 4,
 			perlin_amp_falloff: 0.5,
 			perlin_lcg: lcg::LCG::new(),
 			color_mode: String::from("rgb"),
+			color_maxes: maxes,
 		}
 	}
 }

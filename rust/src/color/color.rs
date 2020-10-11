@@ -17,15 +17,10 @@ pub struct Color {
 #[wasm_bindgen]
 impl Color {
 	pub fn new(inst: &P5Wasm, vals: Vec<f64>) -> Color {
-		let mut maxes = HashMap::new();
-		maxes.insert("rgb".to_string(), vec!(255.0, 255.0, 255.0, 255.0));
-		maxes.insert("hsb".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
-		maxes.insert("hsl".to_string(), vec!(360.0, 100.0, 100.0, 1.0));
-
 		Color {
 			array: vals.iter().map(|v| v / 255.0).collect(),
 			mode: inst.color_mode.clone(),
-			maxes: maxes,
+			maxes: inst.color_maxes.clone(),
 			hsba: None,
 			hsla: None,
 		}
