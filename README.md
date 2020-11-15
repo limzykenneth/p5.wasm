@@ -9,7 +9,7 @@ An experimental addon library for p5.js written in Rust and compiled to WebAssem
 ## Usage
 The easiest way to use p5.wasm is to use the CDN link.
 ```html
-<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.2.0/dist/p5.wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.wasm@0.2.1/dist/p5.wasm.js"></script>
 ```
 
 However if for any reason you cannot use the CDN link, you can continue reading, otherwise skip to the next two paragraphs.
@@ -20,7 +20,7 @@ Unlike most other addon libraries, you will need three files in order to use thi
 2. index.bundle.js
 3. p5.wasm
 
-To use the files, you must put them in a folder called `wasm` in your web server's root, then in your HTML file after including `p5.js`, you can then include `p5.wasm.js` with a `<script>` tag. You should not include the other two files within the HTML file, they will be loaded by `p5.wasm.js`. If you cannot put the files in a folder called `wasm` at root, then you will need to follow the build steps outlined below to build a copy yourself with the right path.
+To use the files, you must put them in the same folder, then in your HTML file after including `p5.js`, you can then include `p5.wasm.js` with a `<script>` tag. You should not include the other two files within the HTML file, they will be loaded by `p5.wasm.js`.
 
 It is not enough however to just include the files. To be able to start using p5.wasm you will need to wait for `index.bundle.js` and `p5.wasm` to finish loading asynchronously by `p5.wasm.js`, otherwise your p5 sketch may be initialized before p5.wasm's functions are attached to the p5 prototype object.
 
@@ -83,7 +83,7 @@ Next run `npm install`. It should build the included Rust project for you as wel
 
 Once done, run `npm run build` to build the library. The three files mentioned above will be saved in the `dist` folder.
 
-If you wish to change the path in which the files are supposed to be served from (default is `/wasm/`), you can run `ASSETS_PATH="your_path/" npm run build`, substituting `your_path` with where you wish to serve the file from. Note the trailing slash after `your_path`, it is required so that `p5.wasm` is requested from `your_path/p5.wasm` and not `your_pathp5.wasm`. You may want to include a leading slash as well to indicate absolute path, or even use a full web link starting with `https://`. Relative paths will be resolved from where the HTML that included `p5.wasm.js` is.
+If you wish to specifically set the path in which the files are supposed to be served from, you can run `ASSETS_PATH="your_path/" npm run build`, substituting `your_path` with where you wish to serve the file from. Note the trailing slash after `your_path`, it is required so that `p5.wasm` is requested from `your_path/p5.wasm` and not `your_pathp5.wasm`. You may want to include a leading slash as well to indicate absolute path, or even use a full web link starting with `https://`. Relative paths will be resolved from where the HTML that included `p5.wasm.js` is.
 
 Whenever you made changes to either Rust or Javascript files, `npm run build` will take care of building both for you.
 

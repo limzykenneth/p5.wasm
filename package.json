@@ -22,7 +22,7 @@
     "dist/*.{js,wasm}",
     "rust/pkg/*"
   ],
-  "author": "Kenneth Lim <limzy.kenneth@gmail.com> (https://designerken.be/)",
+  "author": "Kenneth Lim <limzy.kenneth@gmail.com> (https://limzykenneth.com/)",
   "repository": "github:limzykenneth/p5.wasm",
   "bugs": "https://github.com/limzykenneth/p5.wasm/issues",
   "license": "BSD-2-Clause",
