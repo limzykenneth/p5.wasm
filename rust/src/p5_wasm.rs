@@ -26,7 +26,7 @@ impl P5Wasm {
 		set_panic_hook();
 
 		let mut p = Vec::<f64>::new();
-		for _ in 0..PERLIN_SIZE {
+		for _ in 0..PERLIN_SIZE+1 {
 			p.push(random());
 		}
 

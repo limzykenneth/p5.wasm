@@ -97,7 +97,7 @@ impl P5Wasm {
 	pub fn noise_seed(&mut self, seed: f64){
 		self.perlin_lcg.set_seed(seed);
 		self.perlin = Vec::<f64>::new();
-		for _ in 0..PERLIN_SIZE {
+		for _ in 0..PERLIN_SIZE+1 {
 			self.perlin.push(self.perlin_lcg.rand());
 		}
 	}
