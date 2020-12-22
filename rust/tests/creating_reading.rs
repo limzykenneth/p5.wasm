@@ -19,3 +19,35 @@ fn color_mode(){
 	p5.color_mode("rgb".to_string(), JsValue::from_f64(255.0), JsValue::from_f64(100.0), JsValue::from_f64(0.0), JsValue::UNDEFINED);
 	p5.color_mode("rgb".to_string(), JsValue::from_f64(255.0), JsValue::from_f64(100.0), JsValue::from_f64(0.0), JsValue::from_f64(50.0));
 }
+
+#[wasm_bindgen_test]
+fn red(){
+	let p5 = P5Wasm::new();
+	let color = p5.color(255.0, 200.0, 100.0, 50.0);
+
+	assert_eq!(p5.red(color), 255.0);
+}
+
+#[wasm_bindgen_test]
+fn green(){
+	let p5 = P5Wasm::new();
+	let color = p5.color(255.0, 200.0, 100.0, 50.0);
+
+	assert_eq!(p5.green(color), 200.0);
+}
+
+#[wasm_bindgen_test]
+fn blue(){
+	let p5 = P5Wasm::new();
+	let color = p5.color(255.0, 200.0, 100.0, 50.0);
+
+	assert_eq!(p5.blue(color), 100.0);
+}
+
+#[wasm_bindgen_test]
+fn alpha(){
+	let p5 = P5Wasm::new();
+	let color = p5.color(255.0, 200.0, 100.0, 50.0);
+
+	assert_eq!(p5.alpha(color), 50.0);
+}

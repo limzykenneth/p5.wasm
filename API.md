@@ -84,6 +84,19 @@ Currently the following functions are implemented:
 | `wasm.tan(angle)`                     | `tan(angle)`                   |
 | `wasm.degrees(radians)`               | `degrees(radians)`             |
 | `wasm.radians(degrees)`               | `radians(degrees)`             |
+| **Color**                             |                                |
+| `wasm.color(r, g, b, a)`              | `color(r, g, b, a)`            |
+| `wasm.red(c)`                         | `red(c)`                       |
+| `wasm.green(c)`                       | `green(c)`                     |
+| `wasm.blue(c)`                        | `blue(c)`                      |
+| `wasm.alpha(c)`                       | `alpha(c)`                     |
+|                                       |                                |
+| `Color.to_string([format])`           | `Color.toString([format])`     |
+| `Color.set_red(red)`                  | `Color.setRed(red)`            |
+| `Color.set_green(green)`              | `Color.setGreen(green)`        |
+| `Color.set_blue(blue)`                | `Color.setBlue(blue)`          |
+| `Color.set_alpha(alpha)`              | `Color.setAlpha(alpha)`        |
+
 
 
 ## Note

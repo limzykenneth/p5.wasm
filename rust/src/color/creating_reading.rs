@@ -10,6 +10,22 @@ impl P5Wasm {
 		Color::new(self, vec!(v1, v2, v3, v4))
 	}
 
+	pub fn red(&self, c: Color) -> f64 {
+		c.red()
+	}
+
+	pub fn green(&self, c: Color) -> f64 {
+		c.green()
+	}
+
+	pub fn blue(&self, c: Color) -> f64 {
+		c.blue()
+	}
+
+	pub fn alpha(&self, c: Color) -> f64 {
+		c.alpha()
+	}
+
 	pub fn color_mode(&mut self, mode: String, max_1: JsValue, max_2: JsValue, max_3: JsValue, max_a: JsValue) {
 		if mode == "rgb" || mode == "hsb" || mode == "hsl" {
 			self.color_mode = mode.clone();
