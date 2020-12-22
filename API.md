@@ -26,6 +26,9 @@ Currently the following functions are implemented:
 | `wasm.noise3d(x, y, z)`               | `noise(x, y, z)`               |
 | `wasm.noise_seed(seed)`               | `noiseSeed(seed)`              |
 | `wasm.noise_detail(lod, falloff)`     | `noiseDetail(lod, falloff)`    |
+| **Random**                            |                                |
+| `wasm.random()`                       | `random()`                     |
+| `wasm.random_range(min, max)`         | `random(min, max)`             |
 | **Vectors**                           |                                |
 | `wasm.create_vector()`                | `createVector()`               |
 | `wasm.create_vector_1d(x)`            | `createVector(x)`              |

@@ -6,6 +6,7 @@ mod math {
 	mod noise;
 	mod vector;
 	mod trigonometry;
+	mod random;
 }
 
 mod color {

@@ -16,6 +16,7 @@ pub struct P5Wasm {
 	pub(crate) perlin_octaves: usize,
 	pub(crate) perlin_amp_falloff: f64,
 	pub(crate) perlin_lcg: lcg::LCG,
+	pub(crate) _lcg: lcg::LCG,
 	pub(crate) color_mode: String,
 	pub(crate) color_maxes: HashMap< String, Vec<f64> >,
 }
@@ -40,6 +41,7 @@ impl P5Wasm {
 			perlin_octaves: 4,
 			perlin_amp_falloff: 0.5,
 			perlin_lcg: lcg::LCG::new(),
+			_lcg: lcg::LCG::new(),
 			color_mode: String::from("rgb"),
 			color_maxes: maxes,
 		}
