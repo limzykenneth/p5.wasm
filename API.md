@@ -90,6 +90,12 @@ Currently the following functions are implemented:
 | `wasm.green(c)`                       | `green(c)`                     |
 | `wasm.blue(c)`                        | `blue(c)`                      |
 | `wasm.alpha(c)`                       | `alpha(c)`                     |
+| `wasm.hue(c)`                         | `hue(c)`                       |
+| `wasm.saturation(c)`                  | `saturation(c)`                |
+| `wasm.brightness(c)`                  | `brightness(c)`                |
+| `wasm.lightness(c)`                   | `lightness(c)`                 |
+| `wasm.lerp_color(c1, c2, amt)`        | `lerpColor(c1, c2, amt)`       |
+| `wasm.color_mode(mode)`               | `colorMode(mode)`              |
 |                                       |                                |
 | `Color.to_string([format])`           | `Color.toString([format])`     |
 | `Color.set_red(red)`                  | `Color.setRed(red)`            |
@@ -100,5 +106,6 @@ Currently the following functions are implemented:
 
 
 ## Note
+* If you are using `wasm.Vector` or `wasm.Color`, you should take care to free up memory manually when the variable is no longer in use by calling `.free()` on the object. Failure to do so will result in a crash.
 * If you create a vector using `wasm.create_vector[..]`, you have to use the corresponding p5.wasm functions with it and not the original p5.js ones. You should be able to pass these vectors directly to functions that accept vectors as an input, as long as they only try to access the `x`, `y`, `z` properties only.
 * All trigonometry functions use radians as units, to pass in degrees as a unit, use `wasm.radians()` to convert the angle first.
