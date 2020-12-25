@@ -6,8 +6,8 @@ use wasm_bindgen::JsValue;
 // color/creating_reading.js
 #[wasm_bindgen]
 impl P5Wasm {
-	pub fn color(&self, v1: f64, v2: f64, v3: f64, v4: f64) -> Color {
-		Color::new(self, vec!(v1, v2, v3, v4))
+	pub fn color(&self, v1: JsValue, v2: JsValue, v3: JsValue, v4: JsValue) -> Color {
+		Color::new(self, v1, v2, v3, v4)
 	}
 
 	pub fn red(&self, c: Color) -> f64 {
@@ -24,6 +24,22 @@ impl P5Wasm {
 
 	pub fn alpha(&self, c: Color) -> f64 {
 		c.alpha()
+	}
+
+	pub fn hue(&self, mut c: Color) -> f64 {
+		c.hue()
+	}
+
+	pub fn saturation(&self, mut c: Color) -> f64 {
+		c.saturation()
+	}
+
+	pub fn brightness(&self, mut c: Color) -> f64 {
+		c.brightness()
+	}
+
+	pub fn lightness(&self, mut c: Color) -> f64 {
+		c.lightness()
 	}
 
 	pub fn color_mode(&mut self, mode: String, max_1: JsValue, max_2: JsValue, max_3: JsValue, max_a: JsValue) {

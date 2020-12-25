@@ -11,7 +11,7 @@ wasm_bindgen_test_configure!(run_in_browser);
 #[wasm_bindgen_test]
 fn to_string(){
 	let p5 = P5Wasm::new();
-	let mut c = p5.color(0.0, 255.0, 255.0, 255.0);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(255.0), JsValue::from_f64(255.0), JsValue::from_f64(255.0));
 
 	assert_eq!(c.to_string(JsValue::from_str("#rrggbb")), "#00ffff");
 	assert_eq!(c.to_string(JsValue::from_str("#rrggbbaa")), "#00ffffff");
@@ -35,7 +35,7 @@ fn to_string(){
 #[wasm_bindgen_test]
 fn red(){
 	let p5 = P5Wasm::new();
-	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 
 	assert_eq!(c.red(), 0.0);
 }
@@ -43,7 +43,7 @@ fn red(){
 #[wasm_bindgen_test]
 fn green(){
 	let p5 = P5Wasm::new();
-	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 
 	assert_eq!(c.green(), 200.0);
 }
@@ -51,15 +51,56 @@ fn green(){
 #[wasm_bindgen_test]
 fn blue(){
 	let p5 = P5Wasm::new();
-	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 
 	assert_eq!(c.blue(), 255.0);
 }
 
 #[wasm_bindgen_test]
+fn hue() {
+	let mut p5 = P5Wasm::new();
+	p5.color_mode("hsb".to_string(), JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(100.0), JsValue::from_f64(75.0), JsValue::from_f64(50.0));
+
+	assert_eq!(c.hue(), 0.0);
+}
+
+#[wasm_bindgen_test]
+fn saturation() {
+	let mut p5 = P5Wasm::new();
+	p5.color_mode("hsb".to_string(), JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(100.0), JsValue::from_f64(75.0), JsValue::from_f64(50.0));
+
+	assert_eq!(c.saturation(), 100.0);
+
+	p5.color_mode("hsl".to_string(), JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED);
+	c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(100.0), JsValue::from_f64(75.0), JsValue::from_f64(50.0));
+
+	assert_eq!(c.saturation(), 100.0);
+}
+
+#[wasm_bindgen_test]
+fn brightness() {
+	let mut p5 = P5Wasm::new();
+	p5.color_mode("hsb".to_string(), JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(100.0), JsValue::from_f64(75.0), JsValue::from_f64(50.0));
+
+	assert_eq!(c.brightness(), 75.0);
+}
+
+#[wasm_bindgen_test]
+fn lightness() {
+	let mut p5 = P5Wasm::new();
+	p5.color_mode("hsl".to_string(), JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED, JsValue::UNDEFINED);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(100.0), JsValue::from_f64(75.0), JsValue::from_f64(50.0));
+
+	assert_eq!(c.lightness(), 75.0);
+}
+
+#[wasm_bindgen_test]
 fn alpha(){
 	let p5 = P5Wasm::new();
-	let c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 
 	assert_eq!(c.alpha(), 50.0);
 }
@@ -67,7 +108,7 @@ fn alpha(){
 #[wasm_bindgen_test]
 fn set_red(){
 	let p5 = P5Wasm::new();
-	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 	c.set_red(20.0);
 
 	assert_eq!(c.red(), 20.0);
@@ -76,7 +117,7 @@ fn set_red(){
 #[wasm_bindgen_test]
 fn set_green(){
 	let p5 = P5Wasm::new();
-	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 	c.set_green(30.0);
 
 	assert_eq!(c.green(), 30.0);
@@ -85,7 +126,7 @@ fn set_green(){
 #[wasm_bindgen_test]
 fn set_blue(){
 	let p5 = P5Wasm::new();
-	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 	c.set_blue(40.0);
 
 	assert_eq!(c.blue(), 40.0);
@@ -94,7 +135,7 @@ fn set_blue(){
 #[wasm_bindgen_test]
 fn set_alpha(){
 	let p5 = P5Wasm::new();
-	let mut c = p5.color(0.0, 200.0, 255.0, 50.0);
+	let mut c = p5.color(JsValue::from_f64(0.0), JsValue::from_f64(200.0), JsValue::from_f64(255.0), JsValue::from_f64(50.0));
 	c.set_alpha(0.0);
 
 	assert_eq!(c.alpha(), 0.0);

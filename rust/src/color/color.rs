@@ -16,9 +16,13 @@ pub struct Color {
 
 #[wasm_bindgen]
 impl Color {
-	pub fn new(inst: &P5Wasm, vals: Vec<f64>) -> Color {
+	pub fn new(inst: &P5Wasm, v1: JsValue, v2: JsValue, v3: JsValue, v4: JsValue) -> Color {
+		if inst.color_mode != "rgb" && inst.color_mode != "hsb" && inst.color_mode != "hsl" {
+			panic!("{} is an invalid colorMode.", inst.color_mode);
+		}
+
 		Color {
-			array: vals.iter().map(|v| v / 255.0).collect(),
+			array: parse_inputs(inst.color_mode.clone(), inst.color_maxes.clone(), v1, v2, v3, v4),
 			mode: inst.color_mode.clone(),
 			maxes: inst.color_maxes.clone(),
 			hsba: None,
@@ -241,6 +245,100 @@ impl Color {
 	pub fn alpha(&self) -> f64 {
 		self.array[3] * self.maxes.get(&self.mode).unwrap()[3]
 	}
+
+	pub fn hue(&mut self) -> f64 {
+		let arr = &self.array;
+
+		if self.mode == "hsb" {
+			if self.hsba.is_none() {
+				self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
+			}
+
+			let hsba = self.hsba.as_ref().unwrap();
+			return hsba[0] * self.maxes.get("hsb").unwrap()[0];
+		
+		} else {
+			if self.hsla.is_none() {
+				self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+			}
+
+			let hsla = self.hsla.as_ref().unwrap();
+			return hsla[0] * self.maxes.get("hsb").unwrap()[0];
+		}
+	}
+
+	pub fn saturation(&mut self) -> f64 {
+		let arr = &self.array;
+
+		if self.mode == "hsb" {
+			if self.hsba.is_none() {
+				self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
+			}
+
+			let hsba = self.hsba.as_ref().unwrap();
+			return hsba[1] * self.maxes.get("hsb").unwrap()[1];
+		
+		} else {
+			if self.hsla.is_none() {
+				self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+			}
+
+			let hsla = self.hsla.as_ref().unwrap();
+			return hsla[1] * self.maxes.get("hsb").unwrap()[1];
+		}
+	}
+
+	pub fn brightness(&mut self) -> f64 {
+		let arr = &self.array;
+
+		if self.hsba.is_none() {
+			self.hsba = Some(color_conversion::rgba_to_hsba(arr.to_vec()));
+		}
+
+		let hsba = self.hsba.as_ref().unwrap();
+		return hsba[2] * self.maxes.get("hsb").unwrap()[2];
+	}
+
+	pub fn lightness(&mut self) -> f64 {
+		let arr = &self.array;
+
+		if self.hsla.is_none() {
+			self.hsla = Some(color_conversion::rgba_to_hsla(arr.to_vec()));
+		}
+
+		let hsla = self.hsla.as_ref().unwrap();
+		return hsla[2] * self.maxes.get("hsl").unwrap()[2];
+	}
+}
+
+fn parse_inputs(mode: String, maxes:HashMap< String, Vec<f64> >, r: JsValue, g: JsValue, b: JsValue, a: JsValue) -> Vec<f64> {
+	let maxes = maxes.get(&mode).unwrap();
+	let mut results: Vec<f64> = vec!();
+
+	if g.is_undefined() {
+		// One argument
+	} else if b.is_undefined() {
+		// Two arguments
+	} else {
+		// Three or four arguments
+		results.push((r.as_f64().unwrap() / maxes[0]).constrain(0.0, 1.0));
+		results.push((g.as_f64().unwrap() / maxes[1]).constrain(0.0, 1.0));
+		results.push((b.as_f64().unwrap() / maxes[2]).constrain(0.0, 1.0));
+		if a.is_undefined() {
+			results.push(1.0);
+		} else {
+			results.push((a.as_f64().unwrap() / maxes[3]).constrain(0.0, 1.0));
+		}
+		
+		// Convert from current color mode to RGBA
+		if mode == "hsl" {
+			results = color_conversion::hsla_to_rgba(results);
+		} else if mode == "hsb" {
+			results = color_conversion::hsba_to_rgba(results);
+		}
+	}
+
+	results
 }
 
 fn format_radix(mut x: u32, radix: u32) -> String {
@@ -276,5 +374,22 @@ impl ToPrecision for f64 {
 	    let ret = shifted / magnitude as f64;
 
 	    ret.to_string()
+	}
+}
+
+trait Constrain {
+	fn constrain(&self, min: f64, max: f64) -> f64;
+}
+
+impl Constrain for f64 {
+	fn constrain(&self, min: f64, max: f64) -> f64 {
+		let mut result = self;
+		if self < &min {
+			result = &min;
+		} else if self > &max {
+			result = &max;
+		}
+
+		*result
 	}
 }
