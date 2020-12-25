@@ -8,10 +8,11 @@ use crate::p5_wasm::P5Wasm;
 #[wasm_bindgen]
 pub struct Color {
 	array: Vec<f64>,
+	pub(crate) levels: Vec<f64>,
 	mode: String,
 	maxes: HashMap< String, Vec<f64> >,
-	hsba: Option< Vec<f64> >,
-	hsla: Option< Vec<f64> >,
+	pub(crate) hsba: Option< Vec<f64> >,
+	pub(crate) hsla: Option< Vec<f64> >,
 }
 
 #[wasm_bindgen]
@@ -21,8 +22,11 @@ impl Color {
 			panic!("{} is an invalid colorMode.", inst.color_mode);
 		}
 
+		let arr = parse_inputs(inst.color_mode.clone(), inst.color_maxes.clone(), v1, v2, v3, v4);
+
 		Color {
-			array: parse_inputs(inst.color_mode.clone(), inst.color_maxes.clone(), v1, v2, v3, v4),
+			array: arr.clone(),
+			levels: calculate_levels(&arr),
 			mode: inst.color_mode.clone(),
 			maxes: inst.color_maxes.clone(),
 			hsba: None,
@@ -209,25 +213,29 @@ impl Color {
 				format!("hsla({}%, {}%, {}%, {}%)", h, s, l, a)
 			}
 			"rgba" | _ => {
-				format!("rgba({}, {}, {}, {})", arr[0] * 255.0, arr[1] * 255.0, arr[2] * 255.0, arr[3])
+				format!("rgba({}, {}, {}, {})", (arr[0] * 255.0).round(), (arr[1] * 255.0).round(), (arr[2] * 255.0).round(), arr[3])
 			}
 		}
 	}
 
 	pub fn set_red(&mut self, new_red: f64) {
 		self.array[0] = new_red / self.maxes.get("rgb").unwrap()[0];
+		self.levels = calculate_levels(&self.array);
 	}
 
 	pub fn set_green(&mut self, new_green: f64) {
 		self.array[1] = new_green / self.maxes.get("rgb").unwrap()[1];
+		self.levels = calculate_levels(&self.array);
 	}
 
 	pub fn set_blue(&mut self, new_blue: f64) {
 		self.array[2] = new_blue / self.maxes.get("rgb").unwrap()[2];
+		self.levels = calculate_levels(&self.array);
 	}
 
 	pub fn set_alpha(&mut self, new_alpha: f64) {
 		self.array[3] = new_alpha / self.maxes.get("rgb").unwrap()[3];
+		self.levels = calculate_levels(&self.array);
 	}
 
 	pub fn red(&self) -> f64 {
@@ -339,6 +347,14 @@ fn parse_inputs(mode: String, maxes:HashMap< String, Vec<f64> >, r: JsValue, g: 
 	}
 
 	results
+}
+
+fn calculate_levels(arr: &Vec<f64>) -> Vec<f64> {
+	arr.iter()
+		.map(|x| {
+			(x * 255.0).round()
+		})
+		.collect()
 }
 
 fn format_radix(mut x: u32, radix: u32) -> String {

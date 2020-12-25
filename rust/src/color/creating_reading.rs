@@ -89,4 +89,65 @@ impl P5Wasm {
 			panic!(format!("{} is not a valid color mode", mode));
 		}
 	}
+
+	pub fn lerp_color(&self, mut c1: Color, mut c2: Color, amt: f64) -> Color {
+		// let l0, l1, l2, l3;
+		let from_array: Vec<f64>;
+		let to_array: Vec<f64>;
+
+		if self.color_mode == "rgb" {
+			from_array = c1.levels.iter()
+				.map(|level| {
+					level / 255.0
+				})
+				.collect();
+
+			to_array = c2.levels.iter()
+				.map(|level| {
+					level / 255.0
+				})
+				.collect();
+
+		} else if self.color_mode == "hsb" {
+			c1.brightness();
+			c2.brightness();
+			from_array = c1.hsba.unwrap();
+			to_array = c2.hsba.unwrap();
+
+		} else if self.color_mode == "hsl" {
+			c1.lightness();
+			c2.lightness();
+			from_array = c1.hsla.unwrap();
+			to_array = c2.hsla.unwrap();
+
+		} else {
+			panic!("{} cannot be used for interpolation.", self.color_mode);
+		}
+
+		let amount = amt.constrain(0.0, 1.0);
+
+		let l0 = self.lerp(from_array[0], to_array[0], amount) * self.color_maxes.get(&self.color_mode).unwrap()[0];
+		let l1 = self.lerp(from_array[1], to_array[1], amount) * self.color_maxes.get(&self.color_mode).unwrap()[1];
+		let l2 = self.lerp(from_array[2], to_array[2], amount) * self.color_maxes.get(&self.color_mode).unwrap()[2];
+		let l3 = self.lerp(from_array[3], to_array[3], amount) * self.color_maxes.get(&self.color_mode).unwrap()[3];
+	
+		self.color(JsValue::from_f64(l0), JsValue::from_f64(l1), JsValue::from_f64(l2),JsValue::from_f64(l3))
+	}
+}
+
+trait Constrain {
+	fn constrain(&self, min: f64, max: f64) -> f64;
+}
+
+impl Constrain for f64 {
+	fn constrain(&self, min: f64, max: f64) -> f64 {
+		let mut result = self;
+		if self < &min {
+			result = &min;
+		} else if self > &max {
+			result = &max;
+		}
+
+		*result
+	}
 }
