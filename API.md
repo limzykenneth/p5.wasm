@@ -102,6 +102,7 @@ Currently the following functions are implemented:
 | `Color.set_green(green)`              | `Color.setGreen(green)`        |
 | `Color.set_blue(blue)`                | `Color.setBlue(blue)`          |
 | `Color.set_alpha(alpha)`              | `Color.setAlpha(alpha)`        |
+| `fromWasmColor(wasm_color)`           | N/A                            |
 
 
 
