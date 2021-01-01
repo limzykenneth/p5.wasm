@@ -29,6 +29,7 @@ Currently the following functions are implemented:
 | **Random**                            |                                |
 | `wasm.random()`                       | `random()`                     |
 | `wasm.random_range(min, max)`         | `random(min, max)`             |
+| `wasm.random_seed(seed)`              | `randomSeed(seed)`             |
 | **Vectors**                           |                                |
 | `wasm.create_vector()`                | `createVector()`               |
 | `wasm.create_vector_1d(x)`            | `createVector(x)`              |
