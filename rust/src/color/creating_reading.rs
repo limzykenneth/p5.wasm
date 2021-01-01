@@ -10,35 +10,35 @@ impl P5Wasm {
 		Color::new(self, v1, v2, v3, v4)
 	}
 
-	pub fn red(&self, c: Color) -> f64 {
+	pub fn red(&self, c: &Color) -> f64 {
 		c.red()
 	}
 
-	pub fn green(&self, c: Color) -> f64 {
+	pub fn green(&self, c: &Color) -> f64 {
 		c.green()
 	}
 
-	pub fn blue(&self, c: Color) -> f64 {
+	pub fn blue(&self, c: &Color) -> f64 {
 		c.blue()
 	}
 
-	pub fn alpha(&self, c: Color) -> f64 {
+	pub fn alpha(&self, c: &Color) -> f64 {
 		c.alpha()
 	}
 
-	pub fn hue(&self, mut c: Color) -> f64 {
+	pub fn hue(&self, c: &mut Color) -> f64 {
 		c.hue()
 	}
 
-	pub fn saturation(&self, mut c: Color) -> f64 {
+	pub fn saturation(&self, c: &mut Color) -> f64 {
 		c.saturation()
 	}
 
-	pub fn brightness(&self, mut c: Color) -> f64 {
+	pub fn brightness(&self, c: &mut Color) -> f64 {
 		c.brightness()
 	}
 
-	pub fn lightness(&self, mut c: Color) -> f64 {
+	pub fn lightness(&self, c: &mut Color) -> f64 {
 		c.lightness()
 	}
 
@@ -90,8 +90,7 @@ impl P5Wasm {
 		}
 	}
 
-	pub fn lerp_color(&self, mut c1: Color, mut c2: Color, amt: f64) -> Color {
-		// let l0, l1, l2, l3;
+	pub fn lerp_color(&self, c1: &mut Color, c2: &mut Color, amt: f64) -> Color {
 		let from_array: Vec<f64>;
 		let to_array: Vec<f64>;
 
@@ -111,14 +110,14 @@ impl P5Wasm {
 		} else if self.color_mode == "hsb" {
 			c1.brightness();
 			c2.brightness();
-			from_array = c1.hsba.unwrap();
-			to_array = c2.hsba.unwrap();
+			from_array = c1.hsba.as_ref().unwrap().to_vec();
+			to_array = c2.hsba.as_ref().unwrap().to_vec();
 
 		} else if self.color_mode == "hsl" {
 			c1.lightness();
 			c2.lightness();
-			from_array = c1.hsla.unwrap();
-			to_array = c2.hsla.unwrap();
+			from_array = c1.hsla.as_ref().unwrap().to_vec();
+			to_array = c2.hsla.as_ref().unwrap().to_vec();
 
 		} else {
 			panic!("{} cannot be used for interpolation.", self.color_mode);
