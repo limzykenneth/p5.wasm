@@ -82,11 +82,11 @@ impl P5Wasm {
 
 						self.color_maxes.insert(mode, vec!(max_1, max_2, max_3, max_a));
 					},
-					_ => panic!(format!("Invalid number of arguments passed: {}", arg_count)),
+					_ => panic!("Invalid number of arguments passed: {}", arg_count),
 				}
 			}
 		} else {
-			panic!(format!("{} is not a valid color mode", mode));
+			panic!("{} is not a valid color mode", mode);
 		}
 	}
 

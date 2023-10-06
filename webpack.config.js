@@ -12,7 +12,11 @@ module.exports = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "p5.wasm.js",
 		chunkFilename: "[name].bundle.js",
-		webassemblyModuleFilename: "p5.wasm"
+		webassemblyModuleFilename: "p5.wasm",
+		hashFunction: "sha256"
+	},
+	experiments: {
+		syncWebAssembly: true
 	},
 	plugins: [
 		new DefinePlugin({
